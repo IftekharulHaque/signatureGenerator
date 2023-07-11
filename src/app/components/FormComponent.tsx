@@ -1,12 +1,29 @@
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
+import Switch from "react-switch";
 
 interface FormComponentProps {
   onInputChange: (newInputValues: Record<string, string>) => void;
+  fieldVisibility: Record<string, boolean>;
+  onFieldVisibilityChange: (
+    newFieldVisibility: Record<string, boolean>
+  ) => void;
 }
 
 const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
+  const [isFieldVisible, setIsFieldVisible] = useState(false);
+  const [fieldVisibility, setFieldVisibility] = useState<
+    Record<string, boolean>
+  >({
+    name: false,
+    jobPosition: false,
+    companyName: false,
+    phone: false,
+    address1: false,
+    website: false,
+  });
+
   const [inputValues, setInputValues] = useState<Record<string, string>>({
     name: "",
     jobPosition: "",
@@ -26,6 +43,24 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
     onInputChange(updatedInputValues);
   };
 
+  // const handleSwitchToggle = (checked: boolean) => {
+  //   setIsFieldVisible(checked);
+  // };
+  const handleSwitchToggle = (fieldName: string) => (checked: boolean) => {
+    setFieldVisibility((prevState) => ({
+      ...prevState,
+      [fieldName]: checked,
+    }));
+    console.log(fieldName, checked);
+  };
+
+  //   const handleSwitchToggle = (fieldName: string, checked: boolean) => {
+  //   setFieldVisibility((prevState) => ({
+  //     ...prevState,
+  //     [fieldName]: checked,
+  //   }));
+  // };
+
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
@@ -35,6 +70,38 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">
             <form>
+              <div className="mb-5">
+                <Switch
+                  checked={fieldVisibility[inputValues.name]}
+                  onChange={handleSwitchToggle(inputValues.name)}
+                  onColor="#6A64F1"
+                  offColor="#e0e0e0"
+                  onHandleColor="#ffffff"
+                  offHandleColor="#ffffff"
+                  handleDiameter={22}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  height={24}
+                  width={48}
+                  className="react-switch"
+                />
+              </div>
+              <div className="mb-5">
+                <Switch
+                  checked={fieldVisibility[inputValues.jobPosition]}
+                  onChange={handleSwitchToggle(inputValues.jobPosition)}
+                  onColor="#6A64F1"
+                  offColor="#e0e0e0"
+                  onHandleColor="#ffffff"
+                  offHandleColor="#ffffff"
+                  handleDiameter={22}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  height={24}
+                  width={48}
+                  className="react-switch"
+                />
+              </div>
               <div className="mb-5">
                 <label
                   htmlFor="name"
@@ -51,6 +118,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
                   className={inputStyle}
                 />
               </div>
+
               <div className="mb-5">
                 <label
                   htmlFor="jobPosition"
