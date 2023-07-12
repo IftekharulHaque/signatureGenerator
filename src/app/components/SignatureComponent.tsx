@@ -3,7 +3,6 @@ import { PhoneIcon, GlobeAltIcon, MapPinIcon } from "@heroicons/react/24/solid";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
-  fieldVisibility: Record<string, boolean>;
 }
 
 const SignatureComponent: React.FC<SignatureComponentProps> = ({

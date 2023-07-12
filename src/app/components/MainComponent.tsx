@@ -34,14 +34,13 @@ const MainComponent: React.FC = () => {
         <div className="w-1/2">
           <FormComponent
             onInputChange={handleInputChange}
-            fieldVisibility={fieldVisibility}
-            onFieldVisibilityChange={setVisibility}
+          
           />{" "}
         </div>
         <div className="w-1/2">
           <SignatureComponent
             inputValues={inputValues}
-            fieldVisibility={fieldVisibility}
+        
           />
         </div>
       </div>
