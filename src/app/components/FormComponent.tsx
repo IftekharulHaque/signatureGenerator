@@ -1,17 +1,13 @@
 "use client";
 
+import { test } from "node:test";
 import React, { useState, ChangeEvent } from "react";
-
 
 interface FormComponentProps {
   onInputChange: (newInputValues: Record<string, string>) => void;
-  
 }
 
 const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
-
-
-
   const [inputValues, setInputValues] = useState<Record<string, string>>({
     name: "",
     jobPosition: "",
@@ -30,7 +26,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
     setInputValues(updatedInputValues);
     onInputChange(updatedInputValues);
   };
-
+  // test
 
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
@@ -41,7 +37,6 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">
             <form>
-              
               <div className="mb-5">
                 <label
                   htmlFor="name"
