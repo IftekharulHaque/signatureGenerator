@@ -22,6 +22,62 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
     }
     return;
   };
+  //   const copyFileToProject = (file: File): Promise<void> => {
+  //     return new Promise<void>((resolve, reject) => {
+  //       const reader = new FileReader();
+
+  //       reader.onload = (event) => {
+  //         const fileContent = event.target?.result as ArrayBuffer | null;
+
+  //         if (fileContent) {
+  //           const copiedFile = new File([fileContent], file.name, {
+  //             type: file.type,
+  //           });
+  //           const downloadUrl = URL.createObjectURL(copiedFile);
+
+  //           const link = document.createElement("a");
+  //           link.href = downloadUrl;
+  //           link.download = file.name;
+  //           link.style.display = "none";
+
+  //           document.body.appendChild(link);
+  //           link.click();
+
+  //           URL.revokeObjectURL(downloadUrl);
+  //           document.body.removeChild(link);
+
+  //           resolve();
+  //         } else {
+  //           reject(new Error("Failed to read file content"));
+  //         }
+  //       };
+
+  //       reader.onerror = (event) => {
+  //         reject(new Error("Failed to read file"));
+  //       };
+
+  //       reader.readAsArrayBuffer(file);
+  //     });
+  //   };
+
+  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     if (e.target.files && e.target.files[0]) {
+  //       const selectedFile = e.target.files[0];
+  //       const pic = e.target.files[0];
+
+  //       setProfilepic(pic);
+  //       onInputChange(pic);
+  //       console.log(profilePic);
+
+  //       copyFileToProject(selectedFile)
+  //         .then((copiedFile) => {
+  //           console.log(profilePic);
+  //         })
+  //         .catch((error) => {
+  //           console.error("File copying failed:", error);
+  //         });
+  //     }
+  //   };
 
   const handleClick = () => {
     setProfilepic(null);
@@ -36,7 +92,7 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
             <form className="flex items-center space-x-6">
               <div className="shrink-0">
                 <img
-                  className="h-16 w-16 object-cover rounded-full"
+                  className="h-16 w-16 object-cover rounded-full "
                   src={profilePic ? URL.createObjectURL(profilePic) : ""}
                   alt=""
                 />
