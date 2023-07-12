@@ -31,23 +31,12 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
     onInputChange(updatedInputValues);
   };
 
-  // const handleSwitchToggle = (checked: boolean) => {
-  //   setIsFieldVisible(checked);
-  // };
-
-
-  //   const handleSwitchToggle = (fieldName: string, checked: boolean) => {
-  //   setFieldVisibility((prevState) => ({
-  //     ...prevState,
-  //     [fieldName]: checked,
-  //   }));
-  // };
 
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
   return (
-    <div className="max-w-xl shadow-xl shadow-gray-200 ml-56">
+    <div className="max-w-xl shadow-xl shadow-gray-200 ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">

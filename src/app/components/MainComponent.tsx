@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import FormComponent from "./FormComponent";
 import SignatureComponent from "./SignatureComponent";
+import VerticalNav from "./VerticalNav";
+import PictureComponent from "./PictureComponent";
 
 const MainComponent: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("text");
   const [inputValues, setInputValues] = useState<Record<string, string>>({
     name: "",
     jobPosition: "",
@@ -16,17 +19,29 @@ const MainComponent: React.FC = () => {
   function handleInputChange(newInputValues: Record<string, string>) {
     setInputValues(newInputValues);
   }
-
+  console.log(activeTab);
   return (
     <div className="">
       <div className="text-3xl font-semibold pl-64 pt-16 mt-20 mb-8">
         My Signature
       </div>
-      <div className="flex items-center ">
-        <div className="w-1/2">
-          <FormComponent onInputChange={handleInputChange} />{" "}
+
+      <div className="flex items-start ">
+        <div className="w-1/3">
+          <VerticalNav changeTab={setActiveTab} />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/3">
+          {activeTab === "text" ? (
+            <div>
+              <FormComponent onInputChange={handleInputChange} />
+            </div>
+          ) : (
+            <div>
+              <PictureComponent />
+            </div>
+          )}
+        </div>
+        <div className="w-1/3">
           <SignatureComponent inputValues={inputValues} />
         </div>
       </div>
