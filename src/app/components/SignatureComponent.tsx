@@ -3,10 +3,12 @@ import { PhoneIcon, GlobeAltIcon, MapPinIcon } from "@heroicons/react/24/solid";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
+  isPicChanged: File | null;
 }
 
 const SignatureComponent: React.FC<SignatureComponentProps> = ({
   inputValues,
+  isPicChanged,
 }) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -35,89 +37,102 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
               <p>To:</p>
               <p>Subject:</p>
             </div>
-            <div className="px-8 pb-8" ref={componentRef}>
-              <table
-                className="border-0 "
-                cellPadding={0}
-                cellSpacing={0}
-                width={500}
-                dir="ltr"
-              >
-                <thead>
-                  <tr>
-                    <th className="h-16"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    {inputValues.name && (
+
+            <div className="px-8 pb-8 flex" ref={componentRef}>
+              <div className="mt-24 m-2">
+                {isPicChanged && (
+                  <img
+                    className="h-16 w-16 object-cover rounded-full"
+                    src={isPicChanged ? URL.createObjectURL(isPicChanged) : ""}
+                    alt=""
+                  />
+                )}
+              </div>
+              <div>
+                {" "}
+                <table
+                  className="border-0 "
+                  cellPadding={0}
+                  cellSpacing={0}
+                  width={300}
+                  dir="ltr"
+                >
+                  <thead>
+                    <tr>
+                      <th className="h-16"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {inputValues.name && (
+                        <td
+                          className="leading-6 font-medium font-sans"
+                          align="left"
+                        >
+                          <span className="text-black font-bold">
+                            {inputValues.name}
+                          </span>
+                        </td>
+                      )}
+                    </tr>
+                    <tr>
                       <td
-                        className="leading-6 font-medium font-sans"
+                        className="text-gray-500 font-semibold leading-6 font-sans"
                         align="left"
                       >
-                        <span className="text-black font-bold">
-                          {inputValues.name}
-                        </span>
+                        <p>
+                          {inputValues.jobPosition}{" "}
+                          {inputValues.jobPosition && inputValues.companyName
+                            ? "-"
+                            : null}{" "}
+                          {inputValues.companyName}
+                        </p>
                       </td>
-                    )}
-                  </tr>
-                  <tr>
-                    <td
-                      className="text-gray-500 font-semibold leading-6 font-sans"
-                      align="left"
-                    >
-                      <p>
-                        {inputValues.jobPosition}{" "}
-                        {inputValues.jobPosition && inputValues.companyName
-                          ? "-"
-                          : null}{" "}
-                        {inputValues.companyName}
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      className="text-md leading-6 font-sans pl-3"
-                      align="left"
-                    >
-                      <div className="flex items-center">
-                        {inputValues.phone && (
-                          <PhoneIcon className="h-4 w-3 mr-1 text-black" />
-                        )}
-                        <p>{inputValues.phone}</p>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="leading-6 font-sans pl-3" align="left">
-                      <div className="flex items-center">
-                        {inputValues.address1 && (
-                          <MapPinIcon className="h-4 w-3.5 mr-1 text-black" />
-                        )}
-                        <p>{inputValues.address1}</p>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="leading-6 font-sans pl-3" align="left">
-                      <div className="flex items-center">
-                        {inputValues.website && (
-                          <GlobeAltIcon className="h-4 w-3.4 mr-1 text-black" />
-                        )}
-                        <a
-                          href={`https://${inputValues.website}`}
-                          target="_blank"
-                        >
-                          {inputValues.website}
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="h-4"></td>
-                  </tr>
-                </tbody>
-              </table>
+                    </tr>
+                    <tr>
+                      <td
+                        className="text-md leading-6 font-sans pl-3"
+                        align="left"
+                      >
+                        <div className="flex items-center">
+                          {inputValues.phone && (
+                            <PhoneIcon className="h-4 w-3 mr-1 text-black" />
+                          )}
+                          <p>{inputValues.phone}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="leading-6 font-sans pl-3" align="left">
+                        <div className="flex items-center">
+                          {inputValues.address1 && (
+                            <MapPinIcon className="h-4 w-3.5 mr-1 text-black" />
+                          )}
+                          <p>{inputValues.address1}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="leading-6 font-sans pl-3" align="left">
+                        <div className="flex items-center">
+                          {inputValues.website && (
+                            <GlobeAltIcon className="h-4 w-3.4 mr-1 text-black" />
+                          )}
+                          <a
+                            href={`https://${inputValues.website}`}
+                            target="_blank"
+                          >
+                            {inputValues.website}
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="h-4"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
