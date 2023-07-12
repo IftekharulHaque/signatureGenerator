@@ -13,17 +13,9 @@ const MainComponent: React.FC = () => {
     website: "",
   });
 
-  const handleInputChange = (newInputValues: Record<string, string>) => {
+  function handleInputChange(newInputValues: Record<string, string>) {
     setInputValues(newInputValues);
-  };
-  const [fieldVisibility, setVisibility] = useState<Record<string, boolean>>({
-    name: false,
-    jobPosition: false,
-    companyName: false,
-    phone: false,
-    address1: false,
-    website: false,
-  });
+  }
 
   return (
     <div className="">
@@ -32,16 +24,10 @@ const MainComponent: React.FC = () => {
       </div>
       <div className="flex items-center ">
         <div className="w-1/2">
-          <FormComponent
-            onInputChange={handleInputChange}
-          
-          />{" "}
+          <FormComponent onInputChange={handleInputChange} />{" "}
         </div>
         <div className="w-1/2">
-          <SignatureComponent
-            inputValues={inputValues}
-        
-          />
+          <SignatureComponent inputValues={inputValues} />
         </div>
       </div>
     </div>
