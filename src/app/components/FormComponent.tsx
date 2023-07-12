@@ -2,11 +2,16 @@
 
 import React, { useState, ChangeEvent } from "react";
 
+
 interface FormComponentProps {
   onInputChange: (newInputValues: Record<string, string>) => void;
+  
 }
 
 const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
+
+
+
   const [inputValues, setInputValues] = useState<Record<string, string>>({
     name: "",
     jobPosition: "",
@@ -26,15 +31,17 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
     onInputChange(updatedInputValues);
   };
 
+
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
   return (
-    <div className="max-w-xl shadow-xl shadow-gray-200 ml-56">
+    <div className="max-w-xl shadow-xl shadow-gray-200 ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">
             <form>
+              
               <div className="mb-5">
                 <label
                   htmlFor="name"
@@ -51,6 +58,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
                   className={inputStyle}
                 />
               </div>
+
               <div className="mb-5">
                 <label
                   htmlFor="jobPosition"
