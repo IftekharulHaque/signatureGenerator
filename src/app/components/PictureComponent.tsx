@@ -1,8 +1,89 @@
 "use client";
 import React, { ChangeEvent, useRef, useState } from "react";
 import { ArrowUpIcon, ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { BiUser } from "react-icons/bi";
 
-const PictureComponent = () => {
+interface PictureComponentProps {
+  onInputChange: (newInputValues: File | null) => void;
+}
+
+const PictureComponent: React.FC<PictureComponentProps> = ({
+  onInputChange,
+}) => {
+  const [profilePic, setProfilepic] = useState<File | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const pic = e.target.files[0];
+
+      setProfilepic(pic);
+      onInputChange(pic);
+      console.log(profilePic);
+    }
+    return;
+  };
+  //   const copyFileToProject = (file: File): Promise<void> => {
+  //     return new Promise<void>((resolve, reject) => {
+  //       const reader = new FileReader();
+
+  //       reader.onload = (event) => {
+  //         const fileContent = event.target?.result as ArrayBuffer | null;
+
+  //         if (fileContent) {
+  //           const copiedFile = new File([fileContent], file.name, {
+  //             type: file.type,
+  //           });
+  //           const downloadUrl = URL.createObjectURL(copiedFile);
+
+  //           const link = document.createElement("a");
+  //           link.href = downloadUrl;
+  //           link.download = file.name;
+  //           link.style.display = "none";
+
+  //           document.body.appendChild(link);
+  //           link.click();
+
+  //           URL.revokeObjectURL(downloadUrl);
+  //           document.body.removeChild(link);
+
+  //           resolve();
+  //         } else {
+  //           reject(new Error("Failed to read file content"));
+  //         }
+  //       };
+
+  //       reader.onerror = (event) => {
+  //         reject(new Error("Failed to read file"));
+  //       };
+
+  //       reader.readAsArrayBuffer(file);
+  //     });
+  //   };
+
+  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     if (e.target.files && e.target.files[0]) {
+  //       const selectedFile = e.target.files[0];
+  //       const pic = e.target.files[0];
+
+  //       setProfilepic(pic);
+  //       onInputChange(pic);
+  //       console.log(profilePic);
+
+  //       copyFileToProject(selectedFile)
+  //         .then((copiedFile) => {
+  //           console.log(profilePic);
+  //         })
+  //         .catch((error) => {
+  //           console.error("File copying failed:", error);
+  //         });
+  //     }
+  //   };
+
+  const handleClick = () => {
+    setProfilepic(null);
+    onInputChange(null);
+  };
+
   return (
     <div className="max-w-xl shadow-xl shadow-gray-200 ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
@@ -11,15 +92,16 @@ const PictureComponent = () => {
             <form className="flex items-center space-x-6">
               <div className="shrink-0">
                 <img
-                  className="h-16 w-16 object-cover rounded-full"
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80"
-                  alt="Current profile photo"
+                  className="h-16 w-16 object-cover rounded-full "
+                  src={profilePic ? URL.createObjectURL(profilePic) : ""}
+                  alt=""
                 />
               </div>
               <label className="block">
                 <span className="sr-only">Choose profile photo</span>
                 <input
                   type="file"
+                  onChange={handleChange}
                   className="block w-full text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0
@@ -30,6 +112,12 @@ const PictureComponent = () => {
                 />
               </label>
             </form>
+            <button
+              className="rounded-xl bg-indigo-500 text-white font-semibold p-2 m-2 hover:bg-indigo-400 mt-4"
+              onClick={handleClick}
+            >
+              Remove Picture
+            </button>
           </div>
         </div>
       </div>
