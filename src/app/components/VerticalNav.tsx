@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { UserIcon, PhotoIcon } from "@heroicons/react/24/outline";
-import PictureComponent from "./PictureComponent";
 
 const VerticalNav = ({
   changeTab,
@@ -15,7 +14,7 @@ const VerticalNav = ({
   const handleTextsClick = () => {
     setIsTextsActive(true);
     setIsPicturesActive(false);
-    console.log("Texts clicked");
+    console.log("Texts clicked");``
   };
 
   const handlePicturesClick = () => {

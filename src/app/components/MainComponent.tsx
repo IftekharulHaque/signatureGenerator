@@ -39,11 +39,17 @@ const MainComponent: React.FC = () => {
         <div className="w-1/3">
           {activeTab === "text" ? (
             <div>
-              <FormComponent onInputChange={handleInputChange} />
+              <FormComponent
+                onInputChange={handleInputChange}
+                inputValues={inputValues}
+              />
             </div>
           ) : (
             <div>
-              <PictureComponent onInputChange={handleImageChange} />
+              <PictureComponent
+                onInputChange={handleImageChange}
+                profilePic={isPicChanged}
+              />
             </div>
           )}
         </div>

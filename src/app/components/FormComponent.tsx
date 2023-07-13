@@ -5,28 +5,23 @@ import React, { useState, ChangeEvent } from "react";
 
 interface FormComponentProps {
   onInputChange: (newInputValues: Record<string, string>) => void;
+  inputValues: Record<string, string>;
 }
 
-const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
-  const [inputValues, setInputValues] = useState<Record<string, string>>({
-    name: "",
-    jobPosition: "",
-    companyName: "",
-    phone: "",
-    address1: "",
-    website: "",
-  });
-
+const FormComponent: React.FC<FormComponentProps> = ({
+  onInputChange,
+  inputValues,
+}) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const updatedInputValues = {
       ...inputValues,
       [name]: value,
     };
-    setInputValues(updatedInputValues);
     onInputChange(updatedInputValues);
   };
-  
+
+  console.log(inputValues);
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
@@ -47,6 +42,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ onInputChange }) => {
                   type="text"
                   name="name"
                   placeholder="Full Name"
+                  defaultValue={inputValues.name}
                   value={inputValues.name}
                   onChange={handleChange}
                   className={inputStyle}
