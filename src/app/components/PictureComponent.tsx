@@ -5,20 +5,19 @@ import { BiUser } from "react-icons/bi";
 
 interface PictureComponentProps {
   onInputChange: (newInputValues: File | null) => void;
+  profilePic: File | null;
 }
 
 const PictureComponent: React.FC<PictureComponentProps> = ({
   onInputChange,
+  profilePic,
 }) => {
-  const [profilePic, setProfilepic] = useState<File | null>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const pic = e.target.files[0];
 
-      setProfilepic(pic);
       onInputChange(pic);
-      console.log(profilePic);
+      console.log(pic);
     }
     return;
   };
@@ -80,7 +79,6 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
   //   };
 
   const handleClick = () => {
-    setProfilepic(null);
     onInputChange(null);
   };
 
@@ -93,7 +91,11 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
               <div className="shrink-0">
                 <img
                   className="h-16 w-16 object-cover rounded-full "
-                  src={profilePic ? URL.createObjectURL(profilePic) : ""}
+                  src={
+                    profilePic
+                      ? URL.createObjectURL(profilePic)
+                      : "https://images.unsplash.com/photo-1516724562728-afc824a36e84?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+                  }
                   alt=""
                 />
               </div>
