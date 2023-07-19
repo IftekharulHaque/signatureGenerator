@@ -1,7 +1,5 @@
 "use client";
-import React, { ChangeEvent, useRef, useState } from "react";
-import { ArrowUpIcon, ArrowDownCircleIcon } from "@heroicons/react/24/outline";
-import { BiUser } from "react-icons/bi";
+import React, {  } from "react";
 
 interface PictureComponentProps {
   onInputChange: (newInputValues: File | null) => void;
@@ -21,62 +19,6 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
     }
     return;
   };
-  //   const copyFileToProject = (file: File): Promise<void> => {
-  //     return new Promise<void>((resolve, reject) => {
-  //       const reader = new FileReader();
-
-  //       reader.onload = (event) => {
-  //         const fileContent = event.target?.result as ArrayBuffer | null;
-
-  //         if (fileContent) {
-  //           const copiedFile = new File([fileContent], file.name, {
-  //             type: file.type,
-  //           });
-  //           const downloadUrl = URL.createObjectURL(copiedFile);
-
-  //           const link = document.createElement("a");
-  //           link.href = downloadUrl;
-  //           link.download = file.name;
-  //           link.style.display = "none";
-
-  //           document.body.appendChild(link);
-  //           link.click();
-
-  //           URL.revokeObjectURL(downloadUrl);
-  //           document.body.removeChild(link);
-
-  //           resolve();
-  //         } else {
-  //           reject(new Error("Failed to read file content"));
-  //         }
-  //       };
-
-  //       reader.onerror = (event) => {
-  //         reject(new Error("Failed to read file"));
-  //       };
-
-  //       reader.readAsArrayBuffer(file);
-  //     });
-  //   };
-
-  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     if (e.target.files && e.target.files[0]) {
-  //       const selectedFile = e.target.files[0];
-  //       const pic = e.target.files[0];
-
-  //       setProfilepic(pic);
-  //       onInputChange(pic);
-  //       console.log(profilePic);
-
-  //       copyFileToProject(selectedFile)
-  //         .then((copiedFile) => {
-  //           console.log(profilePic);
-  //         })
-  //         .catch((error) => {
-  //           console.error("File copying failed:", error);
-  //         });
-  //     }
-  //   };
 
   const handleClick = () => {
     onInputChange(null);
