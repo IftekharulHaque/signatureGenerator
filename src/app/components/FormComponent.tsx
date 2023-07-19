@@ -1,7 +1,6 @@
 "use client";
 
-import { test } from "node:test";
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 interface FormComponentProps {
   onInputChange: (newInputValues: Record<string, string>) => void;
@@ -12,6 +11,8 @@ const FormComponent: React.FC<FormComponentProps> = ({
   onInputChange,
   inputValues,
 }) => {
+  const [toggleValues, setToggleValues] = useState<Record<string, string>>({});
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const updatedInputValues = {
@@ -19,6 +20,16 @@ const FormComponent: React.FC<FormComponentProps> = ({
       [name]: value,
     };
     onInputChange(updatedInputValues);
+  };
+
+  const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    if (!checked) {
+      setToggleValues({ ...toggleValues, [name]: inputValues[name] });
+      onInputChange({ ...inputValues, [name]: "" });
+    } else {
+      onInputChange({ ...inputValues, [name]: toggleValues[name] });
+    }
   };
 
   console.log(inputValues);
@@ -38,15 +49,30 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Full Name
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name"
-                  defaultValue={inputValues.name}
-                  value={inputValues.name}
-                  onChange={handleChange}
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    defaultValue={inputValues.name}
+                    value={inputValues.name}
+                    onChange={handleChange}
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="name"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
 
               <div className="mb-5">
@@ -56,14 +82,30 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Job position
                 </label>
-                <input
-                  type="text"
-                  name="jobPosition"
-                  value={inputValues.jobPosition}
-                  onChange={handleChange}
-                  placeholder="Job position"
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="jobPosition"
+                    value={inputValues.jobPosition}
+                    onChange={handleChange}
+                    placeholder="Job position"
+                    className={inputStyle}
+                  />
+
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="jobPosition"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
               <div className="mb-5">
                 <label
@@ -72,14 +114,29 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Company Name
                 </label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={inputValues.companyName}
-                  onChange={handleChange}
-                  placeholder="Company Name"
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="companyName"
+                    value={inputValues.companyName}
+                    onChange={handleChange}
+                    placeholder="Company Name"
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="companyName"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
               <div className="mb-5">
                 <label
@@ -88,14 +145,29 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Phone
                 </label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={inputValues.phone}
-                  onChange={handleChange}
-                  placeholder="Phone"
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="phone"
+                    value={inputValues.phone}
+                    onChange={handleChange}
+                    placeholder="Phone"
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="phone"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
               <div className="mb-5">
                 <label
@@ -104,14 +176,29 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Address 1
                 </label>
-                <input
-                  type="text"
-                  name="address1"
-                  value={inputValues.address1}
-                  onChange={handleChange}
-                  placeholder="Address 1"
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="address1"
+                    value={inputValues.address1}
+                    onChange={handleChange}
+                    placeholder="Address 1"
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="address1"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
               <div className="mb-5">
                 <label
@@ -120,14 +207,29 @@ const FormComponent: React.FC<FormComponentProps> = ({
                 >
                   Website
                 </label>
-                <input
-                  type="text"
-                  name="website"
-                  value={inputValues.website}
-                  onChange={handleChange}
-                  placeholder="Website"
-                  className={inputStyle}
-                />
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="website"
+                    value={inputValues.website}
+                    onChange={handleChange}
+                    placeholder="Website"
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="website"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
               </div>
             </form>
           </div>

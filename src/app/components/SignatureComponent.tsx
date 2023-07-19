@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { PhoneIcon, GlobeAltIcon, MapPinIcon } from "@heroicons/react/24/solid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
@@ -22,12 +24,13 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
         .join("\n");
       const componentHtml = `<style>${styles}</style>\n${componentElement.innerHTML}`;
       navigator.clipboard.writeText(componentHtml);
+      toast.success("Copied to clipboard!");
     }
   };
 
   return (
-    <div>
-      <div className="max-w-xl shadow-xl shadow-gray-200">
+    <div className="mr-10">
+      <div className=" shadow-xl shadow-gray-200">
         <div className="rounded-xl bg-white ring ring-indigo-50">
           <div className="flex-col items-start sm:gap-8">
             <div className="rounded-t-xl bg-indigo-200 p-4 text-sm font-semibold text-indigo-500">
@@ -139,14 +142,19 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex justify-between m-4">
         <button
-          className="rounded-xl bg-indigo-500 text-white font-semibold p-2 m-2 hover:bg-indigo-400 mt-4"
+          className="rounded-xl bg-indigo-500 text-white font-semibold p-4 m-2 hover:bg-indigo-400 mt-4"
           onClick={handleCopy}
         >
           Copy Inner HTML
         </button>
+        <button className="rounded-xl bg-indigo-500 text-white font-semibold p-4 m-2 hover:bg-indigo-400 mt-4">
+          Install Signature
+        </button>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
