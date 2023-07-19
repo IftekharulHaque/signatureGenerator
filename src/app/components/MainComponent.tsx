@@ -27,11 +27,7 @@ const MainComponent: React.FC = () => {
   }
   console.log(isPicChanged);
   return (
-    <div className="">
-      <div className="text-3xl font-semibold pl-64 pt-16 mt-20 mb-8">
-        My Signature
-      </div>
-
+    <div className="my-[8%]">
       <div className="flex items-start ">
         <div className="w-1/3">
           <VerticalNav changeTab={setActiveTab} />

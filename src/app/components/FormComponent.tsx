@@ -39,6 +39,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
   return (
     <div className="max-w-xl shadow-xl shadow-gray-200 ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
+        <div className="px-12 pt-6 -mb-6 text-xl text-[#07074D]">Texts</div>
         <div className="flex items-center justify-center p-12">
           <div className="mx-auto w-full max-w-[550px]">
             <form>
