@@ -1,16 +1,17 @@
 import React, { useRef } from "react";
-import { PhoneIcon, GlobeAltIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
   isPicChanged: File | null;
+  profilePicSize: number;
 }
 
 const SignatureComponent: React.FC<SignatureComponentProps> = ({
   inputValues,
   isPicChanged,
+  profilePicSize,
 }) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -42,14 +43,16 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
             </div>
             <div ref={componentRef}>
               <div className="px-8 pb-8 flex">
-                <div className="mt-24 m-2">
+                <div className="mt-16 mx-3">
                   {isPicChanged && (
                     <img
-                      className="h-16 w-16 object-cover rounded-full"
+                      className="object-cover rounded-full"
                       src={
                         isPicChanged ? URL.createObjectURL(isPicChanged) : ""
                       }
                       alt=""
+                      height={profilePicSize}
+                      width={profilePicSize}
                     />
                   )}
                 </div>
@@ -100,7 +103,15 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         >
                           <div className="flex items-center">
                             {inputValues.phone && (
-                              <PhoneIcon className="h-4 w-3 mr-1 text-black" />
+                              <>
+                                <img
+                                  src="https://w7.pngwing.com/pngs/831/26/png-transparent-telephone-logo-telephone-call-computer-icons-symbol-phone-miscellaneous-cdr-text-thumbnail.png"
+                                  width="10"
+                                  height="10"
+                                  alt="Phone"
+                                  className="mr-1"
+                                />
+                              </>
                             )}
                             <p>{inputValues.phone}</p>
                           </div>
@@ -110,7 +121,15 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         <td className="leading-6 font-sans pl-3" align="left">
                           <div className="flex items-center">
                             {inputValues.address1 && (
-                              <MapPinIcon className="h-4 w-3.5 mr-1 text-black" />
+                              <>
+                                <img
+                                  src="https://w7.pngwing.com/pngs/244/287/png-transparent-google-map-maker-pin-computer-icons-google-maps-map-icon-angle-black-map-thumbnail.png"
+                                  width="10"
+                                  height="10"
+                                  alt="Phone"
+                                  className="mr-1"
+                                />
+                              </>
                             )}
                             <p>{inputValues.address1}</p>
                           </div>
@@ -120,7 +139,15 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         <td className="leading-6 font-sans pl-3" align="left">
                           <div className="flex items-center">
                             {inputValues.website && (
-                              <GlobeAltIcon className="h-4 w-3.4 mr-1 text-black" />
+                              <>
+                                <img
+                                  src="https://w7.pngwing.com/pngs/798/799/png-transparent-web-development-logo-world-wide-web-website-web-symbol-s-web-design-symmetry-monochrome-thumbnail.png"
+                                  width="11"
+                                  height="11"
+                                  alt="Phone"
+                                  className="mr-1"
+                                />
+                              </>
                             )}
                             <a
                               href={`https://${inputValues.website}`}
@@ -139,6 +166,177 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                 </div>
               </div>
             </div>
+            {/* <div
+              ref={componentRef}
+              style={{
+                display: "flex",
+                paddingLeft: "2rem",
+                paddingBottom: "2rem",
+              }}
+            >
+              <div style={{ marginTop: "6rem", marginLeft: "0.5rem" }}>
+                {isPicChanged && (
+                  <img
+                    style={{
+                      height: "4rem",
+                      width: "4rem",
+                      objectFit: "cover",
+                      borderRadius: "9999px",
+                    }}
+                    src={isPicChanged ? URL.createObjectURL(isPicChanged) : ""}
+                    alt=""
+                  />
+                )}
+              </div>
+              <div>
+                <table
+                  style={{
+                    borderCollapse: "collapse",
+                    width: "400px",
+                    direction: "ltr",
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th style={{ height: "4rem" }}></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {inputValues.name && (
+                        <td
+                          style={{
+                            lineHeight: "1.5",
+                            fontWeight: 500,
+                            fontFamily: "sans-serif",
+                          }}
+                          align="left"
+                        >
+                          <span style={{ color: "black", fontWeight: "bold" }}>
+                            {inputValues.name}
+                          </span>
+                        </td>
+                      )}
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          color: "gray",
+                          fontWeight: 600,
+                          lineHeight: "1.5",
+                          fontFamily: "sans-serif",
+                          paddingLeft: "0.75rem",
+                        }}
+                        align="left"
+                      >
+                        <p>
+                          {inputValues.jobPosition}{" "}
+                          {inputValues.jobPosition && inputValues.companyName
+                            ? "-"
+                            : null}{" "}
+                          {inputValues.companyName}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          fontSize: "1rem",
+                          lineHeight: "1.5",
+                          fontFamily: "sans-serif",
+                          paddingLeft: "0.75rem",
+                        }}
+                        align="left"
+                      >
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          {inputValues.phone && (
+                            <img
+                              src="https://s3.sendassets.io/s2/6y27quvq.png"
+                              width="10"
+                              height="10"
+                              style={{
+                                height: "1rem",
+                                width: "0.75rem",
+                                marginRight: "0.25rem",
+                                color: "black",
+                              }}
+                              alt="Phone"
+                            />
+                          )}
+                          <p>{inputValues.phone}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          fontSize: "1rem",
+                          lineHeight: "1.5",
+                          fontFamily: "sans-serif",
+                          paddingLeft: "0.75rem",
+                        }}
+                        align="left"
+                      >
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          {inputValues.address1 && (
+                            <img
+                              src="https://s3.sendassets.io/s2/6y27quvq.png"
+                              width="10"
+                              height="10"
+                              style={{
+                                height: "1rem",
+                                width: "0.875rem",
+                                marginRight: "0.25rem",
+                                color: "black",
+                              }}
+                              alt="Address"
+                            />
+                          )}
+                          <p>{inputValues.address1}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          fontSize: "1rem",
+                          lineHeight: "1.5",
+                          fontFamily: "sans-serif",
+                          paddingLeft: "0.75rem",
+                        }}
+                        align="left"
+                      >
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          {inputValues.website && (
+                            <img
+                              src="https://s3.sendassets.io/s2/6y27quvq.png"
+                              width="10"
+                              height="10"
+                              style={{
+                                height: "1rem",
+                                width: "0.85rem",
+                                marginRight: "0.25rem",
+                                color: "black",
+                              }}
+                              alt="Website"
+                            />
+                          )}
+                          <a
+                            href={`https://${inputValues.website}`}
+                            target="_blank"
+                          >
+                            {inputValues.website}
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style={{ height: "1rem" }}></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div> */}
           </div>
         </div>
       </div>
