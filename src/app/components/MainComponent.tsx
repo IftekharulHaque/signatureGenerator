@@ -8,9 +8,12 @@ import TemplateComponent from "./TemplateComponent";
 import SocialComponent from "./SocialComponent";
 import MarketingComponent from "./MarketingComponent";
 import DesignComponent from "./DesignComponent";
+import Sidebar from "./Sidebar";
 
 const MainComponent: React.FC = () => {
   const [isPicChanged, setIsPicChanged] = useState<File | null>(null);
+  const [isLogoChanged, setIsLogoChanged] = useState<File | null>(null);
+  const [logoSize, setlogoSize] = useState<number>(0);
   const [profilePicSize, setProfilePicSize] = useState<number>(0);
   const [activeTab, setActiveTab] = useState("text");
   const [inputValues, setInputValues] = useState<Record<string, string>>({
@@ -27,36 +30,26 @@ const MainComponent: React.FC = () => {
   }
   console.log(activeTab);
 
-  function handleImageChange(newInputValues: File | null): void {
+  function handleProfilePicChange(newInputValues: File | null): void {
     setIsPicChanged(newInputValues);
   }
-  // function handleSizeChange(newInputValues: number): void {
-  //   setProfilePicSize(newInputValues);
-  // }
+
+  function handleLogoChange(newInputValues: File | null): void {
+    setIsLogoChanged(newInputValues);
+  }
+
   console.log(profilePicSize);
-  console.log(isPicChanged);
+
   return (
     <div className="my-[8%]">
-      <div className="flex items-start ">
-        <div className="w-1/3">
+      <div className="flex items-start  ">
+        <div className="">
+          <Sidebar />
+        </div>
+        <div className="mx-auto">
           <VerticalNav changeTab={setActiveTab} />
         </div>
-        <div className="w-1/3">
-          {/* {activeTab === "text" ? (
-            <div>
-              <FormComponent
-                onInputChange={handleInputChange}
-                inputValues={inputValues}
-              />
-            </div>
-          ) : (
-            <div>
-              <PictureComponent
-                onInputChange={handleImageChange}
-                profilePic={isPicChanged}
-              />
-            </div>
-          )} */}
+        <div className="w-[30%] mx-auto">
           {(() => {
             switch (activeTab) {
               case "text":
@@ -72,15 +65,14 @@ const MainComponent: React.FC = () => {
                 return (
                   <div>
                     <PictureComponent
-                      onInputChange={handleImageChange}
+                      onProfilePicChange={handleProfilePicChange}
                       profilePic={isPicChanged}
                       profilePicSize={profilePicSize}
                       setProfilePicSize={setProfilePicSize}
-                      // onSizeChange={function (newInputValues: string): void {
-                      //   // throw new Error("Function not implemented.");
-                      //   profilePicSize;
-                      // }}
-                      // profilePicSize={null} // profilePicSize={handleSizeChange}
+                      onLogoChange={handleLogoChange}
+                      logo={isLogoChanged}
+                      logoSize={logoSize}
+                      setLogoSize={setlogoSize}
                     />
                   </div>
                 );
@@ -111,11 +103,13 @@ const MainComponent: React.FC = () => {
             }
           })()}
         </div>
-        <div className="w-1/3">
+        <div className="w-[30%] mx-auto">
           <SignatureComponent
             inputValues={inputValues}
             isPicChanged={isPicChanged}
             profilePicSize={profilePicSize} // profilePicSize={profilePicSize}
+            isLogoChanged={isLogoChanged}
+            logoSize={logoSize}
           />
         </div>
       </div>

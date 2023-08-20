@@ -1,36 +1,51 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
   isPicChanged: File | null;
+  isLogoChanged: File | null;
+  logoSize: number;
   profilePicSize: number;
 }
 
 const SignatureComponent: React.FC<SignatureComponentProps> = ({
   inputValues,
   isPicChanged,
+  logoSize,
+  isLogoChanged,
   profilePicSize,
 }) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = () => {
-    if (componentRef.current) {
-      const componentElement = componentRef.current;
-      const styles = Array.from(document.styleSheets)
-        .map((styleSheet) => Array.from(styleSheet.cssRules))
-        .flat()
-        .map((cssRule) => cssRule.cssText)
-        .join("\n");
-      const componentHtml = `<style>${styles}</style>\n${componentElement.innerHTML}`;
-      navigator.clipboard.writeText(componentHtml);
+    // if (componentRef.current) {
+    //   const componentElement = componentRef.current;
+    //   const styles = Array.from(document.styleSheets)
+    //     .map((styleSheet) => Array.from(styleSheet.cssRules))
+    //     .flat()
+    //     .map((cssRule) => cssRule.cssText)
+    //     .join("\n");
+    //   const componentHtml = `<style>${styles}</style>\n${componentElement.innerHTML}`;
+    //   navigator.clipboard.writeText(componentHtml);
+    //   toast.success("Copied to clipboard!");
+    // }
+
+    const signatureElement = document.getElementById("signature");
+    if (signatureElement) {
+      const range = document.createRange();
+      range.selectNode(signatureElement);
+      window.getSelection()?.removeAllRanges();
+      window.getSelection()?.addRange(range);
+      document.execCommand("copy");
+      window.getSelection()?.removeAllRanges();
       toast.success("Copied to clipboard!");
     }
   };
 
   return (
-    <div className="mr-10">
+    <div className="">
       <div className=" shadow-xl shadow-gray-200">
         <div className="rounded-xl bg-white ring ring-indigo-50">
           <div className="flex-col items-start sm:gap-8">
@@ -41,7 +56,9 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
               <p>To:</p>
               <p>Subject:</p>
             </div>
-            <div ref={componentRef}>
+            {/* <div ref={componentRef}>
+             */}
+            {/* <div id="signature">
               <div className="px-8 pb-8 flex">
                 <div className="mt-16 mx-3">
                   {isPicChanged && (
@@ -58,7 +75,8 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                 </div>
                 <div>
                   <table
-                    className="border-0 "
+                    className=" "
+                    border={1}
                     cellPadding={0}
                     cellSpacing={0}
                     width={400}
@@ -165,178 +183,156 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                   </table>
                 </div>
               </div>
-            </div>
-            {/* <div
-              ref={componentRef}
-              style={{
-                display: "flex",
-                paddingLeft: "2rem",
-                paddingBottom: "2rem",
-              }}
-            >
-              <div style={{ marginTop: "6rem", marginLeft: "0.5rem" }}>
-                {isPicChanged && (
-                  <img
-                    style={{
-                      height: "4rem",
-                      width: "4rem",
-                      objectFit: "cover",
-                      borderRadius: "9999px",
-                    }}
-                    src={isPicChanged ? URL.createObjectURL(isPicChanged) : ""}
-                    alt=""
-                  />
-                )}
-              </div>
-              <div>
-                <table
-                  style={{
-                    borderCollapse: "collapse",
-                    width: "400px",
-                    direction: "ltr",
-                  }}
-                >
-                  <thead>
-                    <tr>
-                      <th style={{ height: "4rem" }}></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      {inputValues.name && (
-                        <td
-                          style={{
-                            lineHeight: "1.5",
-                            fontWeight: 500,
-                            fontFamily: "sans-serif",
-                          }}
-                          align="left"
-                        >
-                          <span style={{ color: "black", fontWeight: "bold" }}>
-                            {inputValues.name}
+            </div> */}
+            <div id="signature">
+              <table
+                style={{
+                  border: "1px solid black",
+                  borderCollapse: "collapse",
+                  marginLeft: "32px",
+                }}
+                border={1}
+                cellPadding={0}
+                cellSpacing={0}
+                dir="ltr"
+              >
+                <tbody>
+                  <tr style={{ border: "1px solid black", height: 64 }}>
+                    <td colSpan={2}>blank</td>
+                  </tr>
+                  <tr style={{ border: "1px solid black" }}>
+                    <td rowSpan={8} valign="top">
+                      <div style={{ marginRight: "32px" }}>
+                        {isPicChanged && (
+                          <img
+                            style={{ objectFit: "cover", borderRadius: "50%" }}
+                            src={
+                              isPicChanged
+                                ? URL.createObjectURL(isPicChanged)
+                                : ""
+                            }
+                            alt=""
+                            height={profilePicSize}
+                            width={profilePicSize}
+                          />
+                        )}
+                      </div>
+                    </td>
+                    <td
+                     
+                      align="left"
+                    >
+                      <strong> {inputValues.name}</strong>
+                    </td>
+                  </tr>
+                  <tr style={{ border: "1px solid black" }}>
+                    <td
+                    
+                      align="left"
+                    >
+                      <strong>
+                        {inputValues.jobPosition}
+                        {inputValues.jobPosition && inputValues.companyName
+                          ? " - "
+                          : ""}
+                        {inputValues.companyName}
+                      </strong>
+                    </td>
+                  </tr>
+                  <tr style={{ border: "1px solid black" }}>
+                    <td>
+                      {inputValues.phone && (
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <img
+                            src="https://w7.pngwing.com/pngs/831/26/png-transparent-telephone-logo-telephone-call-computer-icons-symbol-phone-miscellaneous-cdr-text-thumbnail.png"
+                            width="10"
+                            height="10"
+                            alt="Phone"
+                            style={{ marginLeft: "16px", marginRight: "4px" }}
+                          />
+                          <span style={{ fontSize: 14 }}>
+                            {inputValues.phone}
                           </span>
-                        </td>
+                        </div>
                       )}
-                    </tr>
-                    <tr>
-                      <td
-                        style={{
-                          color: "gray",
-                          fontWeight: 600,
-                          lineHeight: "1.5",
-                          fontFamily: "sans-serif",
-                          paddingLeft: "0.75rem",
-                        }}
-                        align="left"
-                      >
-                        <p>
-                          {inputValues.jobPosition}{" "}
-                          {inputValues.jobPosition && inputValues.companyName
-                            ? "-"
-                            : null}{" "}
-                          {inputValues.companyName}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{
-                          fontSize: "1rem",
-                          lineHeight: "1.5",
-                          fontFamily: "sans-serif",
-                          paddingLeft: "0.75rem",
-                        }}
-                        align="left"
-                      >
+                    </td>
+                  </tr>
+                  <tr style={{ border: "1px solid black" }}>
+                    <td>
+                      {inputValues.address1 && (
                         <div style={{ display: "flex", alignItems: "center" }}>
-                          {inputValues.phone && (
-                            <img
-                              src="https://s3.sendassets.io/s2/6y27quvq.png"
-                              width="10"
-                              height="10"
-                              style={{
-                                height: "1rem",
-                                width: "0.75rem",
-                                marginRight: "0.25rem",
-                                color: "black",
-                              }}
-                              alt="Phone"
-                            />
-                          )}
-                          <p>{inputValues.phone}</p>
+                          <img
+                            src="https://w7.pngwing.com/pngs/244/287/png-transparent-google-map-maker-pin-computer-icons-google-maps-map-icon-angle-black-map-thumbnail.png"
+                            width="10"
+                            height="10"
+                            alt="address"
+                            style={{ marginLeft: "16px",marginRight: "4px" }}
+                          />
+                          <span style={{ fontSize: 14 }}>
+                            {inputValues.address1}
+                          </span>
                         </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{
-                          fontSize: "1rem",
-                          lineHeight: "1.5",
-                          fontFamily: "sans-serif",
-                          paddingLeft: "0.75rem",
-                        }}
-                        align="left"
-                      >
+                      )}
+                    </td>
+                  </tr>
+                  <tr style={{ border: "1px solid black" }}>
+                    <td>
+                      {" "}
+                      {inputValues.website && (
                         <div style={{ display: "flex", alignItems: "center" }}>
-                          {inputValues.address1 && (
-                            <img
-                              src="https://s3.sendassets.io/s2/6y27quvq.png"
-                              width="10"
-                              height="10"
-                              style={{
-                                height: "1rem",
-                                width: "0.875rem",
-                                marginRight: "0.25rem",
-                                color: "black",
-                              }}
-                              alt="Address"
-                            />
-                          )}
-                          <p>{inputValues.address1}</p>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{
-                          fontSize: "1rem",
-                          lineHeight: "1.5",
-                          fontFamily: "sans-serif",
-                          paddingLeft: "0.75rem",
-                        }}
-                        align="left"
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          {inputValues.website && (
-                            <img
-                              src="https://s3.sendassets.io/s2/6y27quvq.png"
-                              width="10"
-                              height="10"
-                              style={{
-                                height: "1rem",
-                                width: "0.85rem",
-                                marginRight: "0.25rem",
-                                color: "black",
-                              }}
-                              alt="Website"
-                            />
-                          )}
+                          <img
+                            src="https://w7.pngwing.com/pngs/798/799/png-transparent-web-development-logo-world-wide-web-website-web-symbol-s-web-design-symmetry-monochrome-thumbnail.png"
+                            width="11"
+                            height="11"
+                            alt="Phone"
+                            style={{ marginLeft: "16px" }}
+                          />
                           <a
                             href={`https://${inputValues.website}`}
                             target="_blank"
                           >
-                            {inputValues.website}
+                            <span style={{ fontSize: 14 }}>
+                              {inputValues.website}
+                            </span>
                           </a>
                         </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ height: "1rem" }}></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div> */}
+                      )}
+                    </td>
+                  </tr>
+
+                  <tr style={{ border: "1px solid black" }}>
+                    <td valign="top">
+                      <div style={{ marginRight: "32px" }}>
+                        {isPicChanged && (
+                          <img
+                            style={{ objectFit: "cover", borderRadius: "50%" }}
+                            src={
+                              isLogoChanged
+                                ? URL.createObjectURL(isLogoChanged)
+                                : ""
+                            }
+                            alt=""
+                            height={logoSize}
+                            width={logoSize}
+                          />
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr style={{ border: "1px solid black" }}>
+                    <td>banner</td>
+                  </tr>
+
+                  <tr style={{ border: "1px solid black" }}>
+                    <td>call to action</td>
+                  </tr>
+                  <tr style={{ border: "1px solid black", height: 64 }}>
+                    <td colSpan={2}>blank</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
