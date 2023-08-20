@@ -46,7 +46,7 @@ const VerticalNav = ({
   };
 
   return (
-    <div className="scale-125">
+    <div className="scale-100 sm:scale-125">
       <div className="flex justify-center">
         <div className="flex-col flex ">
           <div className="text-3xl font-semibold mb-8 -mt-[10%]">

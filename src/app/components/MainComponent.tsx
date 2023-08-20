@@ -13,8 +13,8 @@ import Sidebar from "./Sidebar";
 const MainComponent: React.FC = () => {
   const [isPicChanged, setIsPicChanged] = useState<File | null>(null);
   const [isLogoChanged, setIsLogoChanged] = useState<File | null>(null);
-  const [logoSize, setlogoSize] = useState<number>(0);
-  const [profilePicSize, setProfilePicSize] = useState<number>(0);
+  const [logoSize, setlogoSize] = useState<number>(64);
+  const [profilePicSize, setProfilePicSize] = useState<number>(64);
   const [activeTab, setActiveTab] = useState("text");
   const [inputValues, setInputValues] = useState<Record<string, string>>({
     name: "",
@@ -42,7 +42,7 @@ const MainComponent: React.FC = () => {
 
   return (
     <div className="my-[8%]">
-      <div className="flex items-start  ">
+      <div className="flex  flex-col sm:flex-row">
         <div className="">
           <Sidebar />
         </div>
@@ -107,7 +107,7 @@ const MainComponent: React.FC = () => {
           <SignatureComponent
             inputValues={inputValues}
             isPicChanged={isPicChanged}
-            profilePicSize={profilePicSize} // profilePicSize={profilePicSize}
+            profilePicSize={profilePicSize}
             isLogoChanged={isLogoChanged}
             logoSize={logoSize}
           />

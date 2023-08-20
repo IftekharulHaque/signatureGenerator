@@ -25,10 +25,9 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
   const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const pic = e.target.files[0];
-
       onProfilePicChange(pic);
-      console.log(pic);
     }
+    console.log(e.target.files?.[0]);
     return;
   };
 
@@ -42,17 +41,28 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
     return;
   };
 
-  const handleClick = () => {
+  const handleProfilePicClick = () => {
     onProfilePicChange(null);
+  };
+  const handleLogoClick = () => {
     onLogoChange(null);
   };
 
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(1);
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSliderValue = parseInt(event.target.value);
     setSliderValue(newSliderValue);
     setProfilePicSize(newSliderValue);
+  };
+  const [logosliderValue, setlogoSliderValue] = useState(1);
+
+  const handlelogoSliderChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newSliderValue = parseInt(event.target.value);
+    setlogoSliderValue(newSliderValue);
+
     setLogoSize(newSliderValue);
   };
 
@@ -92,7 +102,7 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
                 <input
                   type="range"
                   min={64}
-                  max={240}
+                  max={128}
                   step={8}
                   value={sliderValue}
                   onChange={handleSliderChange}
@@ -100,7 +110,7 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
                 />
                 <button
                   className="rounded-xl bg-indigo-500 text-white font-semibold p-2 m-2  hover:bg-indigo-400 mt-6 max-w-[40%]"
-                  onClick={handleClick}
+                  onClick={handleProfilePicClick}
                 >
                   Remove Picture
                 </button>
@@ -140,15 +150,15 @@ const PictureComponent: React.FC<PictureComponentProps> = ({
                 <input
                   type="range"
                   min={64}
-                  max={240}
+                  max={128}
                   step={8}
-                  value={sliderValue}
-                  onChange={handleSliderChange}
+                  value={logosliderValue}
+                  onChange={handlelogoSliderChange}
                   className="cursor-pointer"
                 />
                 <button
                   className="rounded-xl bg-indigo-500 text-white font-semibold p-2 m-2  hover:bg-indigo-400 mt-6 max-w-[40%]"
-                  onClick={handleClick}
+                  onClick={handleLogoClick}
                 >
                   Remove Picture
                 </button>

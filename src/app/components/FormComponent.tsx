@@ -37,7 +37,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
   return (
-    <div className=" shadow-xl shadow-gray-200 ">
+    <div className=" shadow-xl shadow-gray-200  ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
         <div className="px-12 pt-6 -mb-6 text-xl text-[#07074D]">Texts</div>
         <div className="flex items-center justify-center p-12">

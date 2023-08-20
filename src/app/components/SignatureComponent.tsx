@@ -220,7 +220,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       <strong> {inputValues.name}</strong>
                     </td>
                   </tr>
-                  <tr >
+                  <tr>
                     <td align="left">
                       <strong>
                         {inputValues.jobPosition}
@@ -231,7 +231,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       </strong>
                     </td>
                   </tr>
-                  <tr >
+                  <tr>
                     <td>
                       {inputValues.phone && (
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -249,7 +249,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       )}
                     </td>
                   </tr>
-                  <tr >
+                  <tr>
                     <td>
                       {inputValues.address1 && (
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -267,9 +267,8 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       )}
                     </td>
                   </tr>
-                  <tr >
+                  <tr>
                     <td>
-                     
                       {inputValues.website && (
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
@@ -292,10 +291,10 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                     </td>
                   </tr>
 
-                  <tr >
+                  <tr>
                     <td valign="top">
                       <div style={{ marginRight: "32px" }}>
-                        {isPicChanged && (
+                        {isLogoChanged && (
                           <img
                             style={{ objectFit: "cover", borderRadius: "50%" }}
                             src={
@@ -319,7 +318,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                   <tr style={{ border: "1px solid black" }}>
                     <td>call to action</td>
                   </tr>
-                  <tr style={{height: 64 }}>
+                  <tr style={{ height: 64 }}>
                     <td colSpan={2}></td>
                   </tr>
                 </tbody>
