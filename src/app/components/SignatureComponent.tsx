@@ -187,20 +187,18 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
             <div id="signature">
               <table
                 style={{
-                  border: "1px solid black",
                   borderCollapse: "collapse",
                   marginLeft: "32px",
                 }}
-                border={1}
+                border={0}
                 cellPadding={0}
-                cellSpacing={0}
                 dir="ltr"
               >
                 <tbody>
-                  <tr style={{ border: "1px solid black", height: 64 }}>
-                    <td colSpan={2}>blank</td>
+                  <tr style={{ height: 64 }}>
+                    <td colSpan={2}></td>
                   </tr>
-                  <tr style={{ border: "1px solid black" }}>
+                  <tr>
                     <td rowSpan={8} valign="top">
                       <div style={{ marginRight: "32px" }}>
                         {isPicChanged && (
@@ -218,18 +216,12 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         )}
                       </div>
                     </td>
-                    <td
-                     
-                      align="left"
-                    >
+                    <td align="left">
                       <strong> {inputValues.name}</strong>
                     </td>
                   </tr>
-                  <tr style={{ border: "1px solid black" }}>
-                    <td
-                    
-                      align="left"
-                    >
+                  <tr >
+                    <td align="left">
                       <strong>
                         {inputValues.jobPosition}
                         {inputValues.jobPosition && inputValues.companyName
@@ -239,7 +231,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       </strong>
                     </td>
                   </tr>
-                  <tr style={{ border: "1px solid black" }}>
+                  <tr >
                     <td>
                       {inputValues.phone && (
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -257,7 +249,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       )}
                     </td>
                   </tr>
-                  <tr style={{ border: "1px solid black" }}>
+                  <tr >
                     <td>
                       {inputValues.address1 && (
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -266,7 +258,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                             width="10"
                             height="10"
                             alt="address"
-                            style={{ marginLeft: "16px",marginRight: "4px" }}
+                            style={{ marginLeft: "16px", marginRight: "4px" }}
                           />
                           <span style={{ fontSize: 14 }}>
                             {inputValues.address1}
@@ -275,9 +267,9 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       )}
                     </td>
                   </tr>
-                  <tr style={{ border: "1px solid black" }}>
+                  <tr >
                     <td>
-                      {" "}
+                     
                       {inputValues.website && (
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
@@ -300,7 +292,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                     </td>
                   </tr>
 
-                  <tr style={{ border: "1px solid black" }}>
+                  <tr >
                     <td valign="top">
                       <div style={{ marginRight: "32px" }}>
                         {isPicChanged && (
@@ -327,8 +319,8 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                   <tr style={{ border: "1px solid black" }}>
                     <td>call to action</td>
                   </tr>
-                  <tr style={{ border: "1px solid black", height: 64 }}>
-                    <td colSpan={2}>blank</td>
+                  <tr style={{height: 64 }}>
+                    <td colSpan={2}></td>
                   </tr>
                 </tbody>
               </table>
