@@ -280,7 +280,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                             width="11"
                             height="11"
                             alt="Phone"
-                            style={{ marginLeft: "16px" }}
+                            style={{ marginLeft: "16px" , marginRight: "4px"}}
                           />
                           <a
                             href={`https://${inputValues.website}`}

@@ -54,7 +54,7 @@ const MainComponent: React.FC = () => {
         <div className="mx-auto">
           <VerticalNav changeTab={setActiveTab} />
         </div>
-        <div className="w-[30%] mx-auto">
+        <div className="sm:w-[30%] mx-auto">
           {(() => {
             switch (activeTab) {
               case "text":
@@ -111,7 +111,7 @@ const MainComponent: React.FC = () => {
             }
           })()}
         </div>
-        <div className="w-[30%] mx-auto">
+        <div className="sm:w-[30%] mx-auto">
           <SignatureComponent
             inputValues={inputValues}
             isPicChanged={isPicChanged}
