@@ -6,7 +6,9 @@ interface SignatureComponentProps {
   inputValues: Record<string, string>;
   isPicChanged: File | null;
   isLogoChanged: File | null;
+  isBannerChanged: File | null;
   logoSize: number;
+
   profilePicSize: number;
 }
 
@@ -16,6 +18,8 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
   logoSize,
   isLogoChanged,
   profilePicSize,
+  isBannerChanged,
+  
 }) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -311,8 +315,25 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                     </td>
                   </tr>
 
-                  <tr style={{ border: "1px solid black" }}>
-                    <td>banner</td>
+                  <tr >
+                    <td>
+                      {" "}
+                      <div style={{ marginRight: "32px" }}>
+                        {isBannerChanged && (
+                          <img
+                            style={{ objectFit: "cover", borderRadius: "5%" }}
+                            src={
+                              isBannerChanged
+                                ? URL.createObjectURL(isBannerChanged)
+                                : ""
+                            }
+                            alt=""
+                            height="auto"
+                            width={256}
+                          />
+                        )}
+                      </div>
+                    </td>
                   </tr>
 
                   <tr style={{ border: "1px solid black" }}>

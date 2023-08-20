@@ -13,6 +13,8 @@ import Sidebar from "./Sidebar";
 const MainComponent: React.FC = () => {
   const [isPicChanged, setIsPicChanged] = useState<File | null>(null);
   const [isLogoChanged, setIsLogoChanged] = useState<File | null>(null);
+  const [isBannerChanged, setisBannerChnaged] = useState<File | null>(null);
+
   const [logoSize, setlogoSize] = useState<number>(64);
   const [profilePicSize, setProfilePicSize] = useState<number>(64);
   const [activeTab, setActiveTab] = useState("text");
@@ -36,6 +38,9 @@ const MainComponent: React.FC = () => {
 
   function handleLogoChange(newInputValues: File | null): void {
     setIsLogoChanged(newInputValues);
+  }
+  function handleBannerChange(newInputValues: File | null): void {
+    setisBannerChnaged(newInputValues);
   }
 
   console.log(profilePicSize);
@@ -91,7 +96,10 @@ const MainComponent: React.FC = () => {
               case "marketing":
                 return (
                   <div>
-                    <MarketingComponent />
+                    <MarketingComponent
+                      onBannerChange={handleBannerChange}
+                      bannerPic={isBannerChanged}
+                    />
                   </div>
                 );
               case "design":
@@ -110,6 +118,8 @@ const MainComponent: React.FC = () => {
             profilePicSize={profilePicSize}
             isLogoChanged={isLogoChanged}
             logoSize={logoSize}
+            isBannerChanged={isBannerChanged}
+          
           />
         </div>
       </div>
