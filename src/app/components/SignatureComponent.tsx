@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import copy from "clipboard-copy";
+import ReactQuill from "react-quill";
 
 interface SignatureComponentProps {
   inputValues: Record<string, string>;
@@ -20,29 +22,44 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
   profilePicSize,
   isBannerChanged,
 }) => {
-  const componentRef = useRef<HTMLDivElement>(null);
+  const [inputText, setInputText] = useState("");
+  const [convertedText, setConvertedText] = useState("");
 
+  // Function to handle input text change
+  const handleInputChange = (text: string) => {
+    setInputText(text);
+  };
+
+  // Function to handle Quill editor content change
+  const handleQuillChange = (content: string) => {
+    setConvertedText(content);
+  };
+
+  // Function to copy converted text to clipboard
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(convertedText);
+  };
   const handleCopy = () => {
-    // if (componentRef.current) {
-    //   const componentElement = componentRef.current;
-    //   const styles = Array.from(document.styleSheets)
-    //     .map((styleSheet) => Array.from(styleSheet.cssRules))
-    //     .flat()
-    //     .map((cssRule) => cssRule.cssText)
-    //     .join("\n");
-    //   const componentHtml = `<style>${styles}</style>\n${componentElement.innerHTML}`;
-    //   navigator.clipboard.writeText(componentHtml);
-    //   toast.success("Copied to clipboard!");
-    // }
-
     const signatureElement = document.getElementById("signature");
     if (signatureElement) {
-      const range = document.createRange();
-      range.selectNode(signatureElement);
-      window.getSelection()?.removeAllRanges();
-      window.getSelection()?.addRange(range);
-      document.execCommand("copy");
-      window.getSelection()?.removeAllRanges();
+      // const range = document.createRange();
+      // range.selectNode(signatureElement);
+      // window.getSelection()?.removeAllRanges();
+      // window.getSelection()?.addRange(range);
+      // document.execCommand("copy");
+      // window.getSelection()?.removeAllRanges();
+      const innerHTML = signatureElement.innerHTML;
+      copy(innerHTML);
+
+      // const html = new DOMParser().parseFromString(innerHTML, "text/html");
+      // const body = html.body;
+      // const range = document.createRange();
+      // range.selectNode(body);
+      // window.getSelection()?.removeAllRanges();
+      // window.getSelection()?.addRange(range);
+      // document.execCommand("copy");
+      // window.getSelection()?.removeAllRanges();
+      // console.log(body);
       toast.success("Copied to clipboard!");
     }
   };
@@ -65,6 +82,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                 style={{
                   borderCollapse: "collapse",
                   marginLeft: "32px",
+                  fontFamily: "cursive",
                 }}
                 border={0}
                 cellPadding={0}
@@ -96,62 +114,64 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       <strong> {inputValues.name}</strong>
                     </td>
                   </tr>
-                  <tr>
-                    <td align="left">
-                      <strong>
-                        {inputValues.jobPosition}
-                        {inputValues.jobPosition && inputValues.companyName
-                          ? " - "
-                          : ""}
-                        {inputValues.companyName}
-                      </strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {inputValues.phone && (
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                  {(inputValues.jobPosition || inputValues.companyName) && (
+                    <tr>
+                      <td align="left">
+                        <strong>
+                          {inputValues.jobPosition}
+                          {inputValues.jobPosition && inputValues.companyName
+                            ? " - "
+                            : ""}
+                          {inputValues.companyName}
+                        </strong>
+                      </td>
+                    </tr>
+                  )}
+                  {inputValues.phone && (
+                    <tr>
+                      <td>
+                        <span style={{ display: "flex", alignItems: "center" }}>
                           <img
                             src="https://bit.ly/44mNnmG"
                             width="10"
-                            height="10"
-                            alt="Phone"
+                            height=""
+                            alt=""
                             style={{ marginLeft: "16px", marginRight: "4px" }}
                           />
                           <span style={{ fontSize: 14 }}>
                             {inputValues.phone}
                           </span>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {inputValues.address1 && (
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                  {inputValues.address1 && (
+                    <tr>
+                      <td>
+                        <span style={{ display: "flex", alignItems: "center" }}>
                           <img
                             src="https://bit.ly/3E6nHQJ"
                             width="10"
-                            height="10"
-                            alt="address"
+                            height=""
+                            alt=""
                             style={{ marginLeft: "16px", marginRight: "4px" }}
                           />
                           <span style={{ fontSize: 14 }}>
                             {inputValues.address1}
                           </span>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      {inputValues.website && (
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                  {inputValues.website && (
+                    <tr>
+                      <td>
+                        <span style={{ display: "flex", alignItems: "center" }}>
                           <img
                             src="https://bit.ly/44sotT2"
                             width="11"
-                            height="11"
-                            alt="Phone"
+                            height=""
+                            alt=""
                             style={{ marginLeft: "16px", marginRight: "4px" }}
                           />
                           <a
@@ -162,40 +182,61 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                               {inputValues.website}
                             </span>
                           </a>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td valign="top">
-                      <div style={{ marginRight: "32px" }}>
-                        {isLogoChanged && (
-                          <img
-                            style={{ objectFit: "cover", borderRadius: "50%" }}
-                            src={
-                              isLogoChanged
-                                ? URL.createObjectURL(isLogoChanged)
-                                : ""
-                            }
-                            alt=""
-                            height={logoSize}
-                            width={logoSize}
-                          />
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      {(isBannerChanged || inputValues.bannerLink) && (
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                  {isLogoChanged && (
+                    <tr>
+                      <td valign="top">
                         <div style={{ marginRight: "32px" }}>
-                          {inputValues.bannerLink && (
-                            <a
-                              href={`https://${inputValues.bannerLink}`}
-                              target="_blank"
-                            >
+                          {isLogoChanged && (
+                            <img
+                              style={{
+                                objectFit: "cover",
+                                borderRadius: "50%",
+                              }}
+                              src={
+                                isLogoChanged
+                                  ? URL.createObjectURL(isLogoChanged)
+                                  : ""
+                              }
+                              alt=""
+                              height={logoSize}
+                              width={logoSize}
+                            />
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  {isBannerChanged && (
+                    <tr>
+                      <td>
+                        {(isBannerChanged || inputValues.bannerLink) && (
+                          <div style={{ marginRight: "32px" }}>
+                            {inputValues.bannerLink && (
+                              <a
+                                href={`https://${inputValues.bannerLink}`}
+                                target="_blank"
+                              >
+                                <img
+                                  style={{
+                                    objectFit: "cover",
+                                    borderRadius: "5%",
+                                  }}
+                                  src={
+                                    isBannerChanged
+                                      ? URL.createObjectURL(isBannerChanged)
+                                      : ""
+                                  }
+                                  alt=""
+                                  height="auto"
+                                  width={256}
+                                />
+                              </a>
+                            )}
+                            {!inputValues.bannerLink && (
                               <img
                                 style={{
                                   objectFit: "cover",
@@ -210,62 +251,51 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                                 height="auto"
                                 width={256}
                               />
-                            </a>
+                            )}
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  )}
+                  {inputValues.callToActionText && (
+                    <tr>
+                      <td>
+                        {inputValues.callToActionText &&
+                          inputValues.callToActionLink && (
+                            <div
+                              style={{
+                                display: "inline-block",
+                                backgroundColor: "black",
+                                color: "white",
+                                margin: "5px",
+                                borderRadius: "5px",
+                              }}
+                            >
+                              <a
+                                href={`https://${inputValues.callToActionLink}`}
+                                target="_blank"
+                              >
+                                <strong>{inputValues.callToActionText}</strong>
+                              </a>
+                            </div>
                           )}
-                          {!inputValues.bannerLink && (
-                            <img
-                              style={{ objectFit: "cover", borderRadius: "5%" }}
-                              src={
-                                isBannerChanged
-                                  ? URL.createObjectURL(isBannerChanged)
-                                  : ""
-                              }
-                              alt=""
-                              height="auto"
-                              width={256}
-                            />
-                          )}
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      {inputValues.callToActionText &&
-                        inputValues.callToActionLink && (
+                        {!inputValues.callToActionLink && (
                           <div
                             style={{
                               display: "inline-block",
+                              borderRadius: "5px",
                               backgroundColor: "black",
                               color: "white",
                               margin: "5px",
-                              borderRadius: "5px",
                             }}
                           >
-                            <a
-                              href={`https://${inputValues.callToActionLink}`}
-                              target="_blank"
-                            >
-                              <strong>{inputValues.callToActionText}</strong>
-                            </a>
+                            <strong>{inputValues.callToActionText}</strong>
                           </div>
                         )}
-                      {!inputValues.callToActionLink && (
-                        <div
-                          style={{
-                            display: "inline-block",
-                            borderRadius: "5px",
-                            backgroundColor: "black",
-                            color: "white",
-                            margin: "5px",
-                          }}
-                        >
-                          <strong>{inputValues.callToActionText}</strong>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  )}
+
                   <tr style={{ height: 64 }}>
                     <td colSpan={2}></td>
                   </tr>
@@ -285,6 +315,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
         <button className="rounded-xl bg-indigo-500 text-white font-semibold p-4 m-2 hover:bg-indigo-400 mt-4">
           Install Signature
         </button>
+       
       </div>
 
       <ToastContainer />
