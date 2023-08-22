@@ -112,7 +112,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       {inputValues.phone && (
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
-                            src="https://w7.pngwing.com/pngs/831/26/png-transparent-telephone-logo-telephone-call-computer-icons-symbol-phone-miscellaneous-cdr-text-thumbnail.png"
+                            src="https://bit.ly/44mNnmG"
                             width="10"
                             height="10"
                             alt="Phone"
@@ -130,7 +130,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       {inputValues.address1 && (
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
-                            src="https://w7.pngwing.com/pngs/244/287/png-transparent-google-map-maker-pin-computer-icons-google-maps-map-icon-angle-black-map-thumbnail.png"
+                            src="https://bit.ly/3E6nHQJ"
                             width="10"
                             height="10"
                             alt="address"
@@ -148,7 +148,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       {inputValues.website && (
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
-                            src="https://w7.pngwing.com/pngs/798/799/png-transparent-web-development-logo-world-wide-web-website-web-symbol-s-web-design-symmetry-monochrome-thumbnail.png"
+                            src="https://bit.ly/44sotT2"
                             width="11"
                             height="11"
                             alt="Phone"
