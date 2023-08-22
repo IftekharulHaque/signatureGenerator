@@ -236,8 +236,6 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         inputValues.callToActionLink && (
                           <div
                             style={{
-                              display: "flex",
-                              alignItems: "center",
                               backgroundColor: "black",
                               borderRadius: "15%",
                               color: "white",
@@ -254,8 +252,6 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       {!inputValues.callToActionLink && (
                         <div
                           style={{
-                            display: "flex",
-                            alignItems: "center",
                             backgroundColor: "black",
                             borderRadius: "15%",
                             color: "white",
