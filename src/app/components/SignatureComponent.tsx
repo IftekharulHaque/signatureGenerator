@@ -241,7 +241,6 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                               backgroundColor: "black",
                               borderRadius: "15%",
                               color: "white",
-                              padding: "5px",
                             }}
                           >
                             <a
@@ -260,7 +259,6 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                             backgroundColor: "black",
                             borderRadius: "15%",
                             color: "white",
-                            padding: "5px",
                           }}
                         >
                           <strong>{inputValues.callToActionText}</strong>
