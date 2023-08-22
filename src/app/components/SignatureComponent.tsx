@@ -236,9 +236,11 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                         inputValues.callToActionLink && (
                           <div
                             style={{
+                              display: "inline-block",
                               backgroundColor: "black",
-                              borderRadius: "15%",
                               color: "white",
+                              margin: "5px",
+                              borderRadius: "5px",
                             }}
                           >
                             <a
@@ -252,9 +254,11 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                       {!inputValues.callToActionLink && (
                         <div
                           style={{
+                            display: "inline-block",
+                            borderRadius: "5px",
                             backgroundColor: "black",
-                            borderRadius: "15%",
                             color: "white",
+                            margin: "5px",
                           }}
                         >
                           <strong>{inputValues.callToActionText}</strong>
