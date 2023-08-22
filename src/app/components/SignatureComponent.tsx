@@ -230,27 +230,41 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                     </td>
                   </tr>
 
-                  <tr >
+                  <tr>
                     <td>
                       {inputValues.callToActionText &&
                         inputValues.callToActionLink && (
                           <div
-                            style={{ display: "flex", alignItems: "center" }}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              backgroundColor: "black",
+                              borderRadius: "15%",
+                              color: "white",
+                              padding: "5px",
+                            }}
                           >
                             <a
                               href={`https://${inputValues.callToActionLink}`}
                               target="_blank"
                             >
-                              <span >
-                                {inputValues.callToActionText}
-                              </span>
+                              <strong>{inputValues.callToActionText}</strong>
                             </a>
                           </div>
                         )}
                       {!inputValues.callToActionLink && (
-                        <span >
-                          {inputValues.callToActionText}
-                        </span>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            backgroundColor: "black",
+                            borderRadius: "15%",
+                            color: "white",
+                            padding: "5px",
+                          }}
+                        >
+                          <strong>{inputValues.callToActionText}</strong>
+                        </div>
                       )}
                     </td>
                   </tr>
