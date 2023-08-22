@@ -19,7 +19,6 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
   isLogoChanged,
   profilePicSize,
   isBannerChanged,
-  
 }) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -60,134 +59,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
               <p>To:</p>
               <p>Subject:</p>
             </div>
-            {/* <div ref={componentRef}>
-             */}
-            {/* <div id="signature">
-              <div className="px-8 pb-8 flex">
-                <div className="mt-16 mx-3">
-                  {isPicChanged && (
-                    <img
-                      className="object-cover rounded-full"
-                      src={
-                        isPicChanged ? URL.createObjectURL(isPicChanged) : ""
-                      }
-                      alt=""
-                      height={profilePicSize}
-                      width={profilePicSize}
-                    />
-                  )}
-                </div>
-                <div>
-                  <table
-                    className=" "
-                    border={1}
-                    cellPadding={0}
-                    cellSpacing={0}
-                    width={400}
-                    dir="ltr"
-                  >
-                    <thead>
-                      <tr>
-                        <th className="h-16"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        {inputValues.name && (
-                          <td
-                            className="leading-6 font-medium font-sans"
-                            align="left"
-                          >
-                            <span className="text-black font-bold">
-                              {inputValues.name}
-                            </span>
-                          </td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td
-                          className="text-gray-500 font-semibold leading-6 font-sans"
-                          align="left"
-                        >
-                          <p>
-                            {inputValues.jobPosition}{" "}
-                            {inputValues.jobPosition && inputValues.companyName
-                              ? "-"
-                              : null}{" "}
-                            {inputValues.companyName}
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="text-md leading-6 font-sans pl-3"
-                          align="left"
-                        >
-                          <div className="flex items-center">
-                            {inputValues.phone && (
-                              <>
-                                <img
-                                  src="https://w7.pngwing.com/pngs/831/26/png-transparent-telephone-logo-telephone-call-computer-icons-symbol-phone-miscellaneous-cdr-text-thumbnail.png"
-                                  width="10"
-                                  height="10"
-                                  alt="Phone"
-                                  className="mr-1"
-                                />
-                              </>
-                            )}
-                            <p>{inputValues.phone}</p>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="leading-6 font-sans pl-3" align="left">
-                          <div className="flex items-center">
-                            {inputValues.address1 && (
-                              <>
-                                <img
-                                  src="https://w7.pngwing.com/pngs/244/287/png-transparent-google-map-maker-pin-computer-icons-google-maps-map-icon-angle-black-map-thumbnail.png"
-                                  width="10"
-                                  height="10"
-                                  alt="Phone"
-                                  className="mr-1"
-                                />
-                              </>
-                            )}
-                            <p>{inputValues.address1}</p>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="leading-6 font-sans pl-3" align="left">
-                          <div className="flex items-center">
-                            {inputValues.website && (
-                              <>
-                                <img
-                                  src="https://w7.pngwing.com/pngs/798/799/png-transparent-web-development-logo-world-wide-web-website-web-symbol-s-web-design-symmetry-monochrome-thumbnail.png"
-                                  width="11"
-                                  height="11"
-                                  alt="Phone"
-                                  className="mr-1"
-                                />
-                              </>
-                            )}
-                            <a
-                              href={`https://${inputValues.website}`}
-                              target="_blank"
-                            >
-                              {inputValues.website}
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="h-4"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div> */}
+
             <div id="signature">
               <table
                 style={{
@@ -280,7 +152,7 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                             width="11"
                             height="11"
                             alt="Phone"
-                            style={{ marginLeft: "16px" , marginRight: "4px"}}
+                            style={{ marginLeft: "16px", marginRight: "4px" }}
                           />
                           <a
                             href={`https://${inputValues.website}`}
@@ -315,29 +187,72 @@ const SignatureComponent: React.FC<SignatureComponentProps> = ({
                     </td>
                   </tr>
 
-                  <tr >
+                  <tr>
                     <td>
-                      {" "}
-                      <div style={{ marginRight: "32px" }}>
-                        {isBannerChanged && (
-                          <img
-                            style={{ objectFit: "cover", borderRadius: "5%" }}
-                            src={
-                              isBannerChanged
-                                ? URL.createObjectURL(isBannerChanged)
-                                : ""
-                            }
-                            alt=""
-                            height="auto"
-                            width={256}
-                          />
-                        )}
-                      </div>
+                      {(isBannerChanged || inputValues.bannerLink) && (
+                        <div style={{ marginRight: "32px" }}>
+                          {inputValues.bannerLink && (
+                            <a
+                              href={`https://${inputValues.bannerLink}`}
+                              target="_blank"
+                            >
+                              <img
+                                style={{
+                                  objectFit: "cover",
+                                  borderRadius: "5%",
+                                }}
+                                src={
+                                  isBannerChanged
+                                    ? URL.createObjectURL(isBannerChanged)
+                                    : ""
+                                }
+                                alt=""
+                                height="auto"
+                                width={256}
+                              />
+                            </a>
+                          )}
+                          {!inputValues.bannerLink && (
+                            <img
+                              style={{ objectFit: "cover", borderRadius: "5%" }}
+                              src={
+                                isBannerChanged
+                                  ? URL.createObjectURL(isBannerChanged)
+                                  : ""
+                              }
+                              alt=""
+                              height="auto"
+                              width={256}
+                            />
+                          )}
+                        </div>
+                      )}
                     </td>
                   </tr>
 
-                  <tr style={{ border: "1px solid black" }}>
-                    <td>call to action</td>
+                  <tr >
+                    <td>
+                      {inputValues.callToActionText &&
+                        inputValues.callToActionLink && (
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <a
+                              href={`https://${inputValues.callToActionLink}`}
+                              target="_blank"
+                            >
+                              <span >
+                                {inputValues.callToActionText}
+                              </span>
+                            </a>
+                          </div>
+                        )}
+                      {!inputValues.callToActionLink && (
+                        <span >
+                          {inputValues.callToActionText}
+                        </span>
+                      )}
+                    </td>
                   </tr>
                   <tr style={{ height: 64 }}>
                     <td colSpan={2}></td>

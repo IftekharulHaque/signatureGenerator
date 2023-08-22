@@ -10,18 +10,22 @@ import {
 } from "@heroicons/react/24/outline";
 
 const categories = [
-  { id: "text", icon: UserIcon, label: "Texts" },
-  { id: "picture", icon: PhotoIcon, label: "Pictures" },
-  { id: "template", icon: Square2StackIcon, label: "Templates" },
-  { id: "social", icon: ShareIcon, label: "Socials" },
-  { id: "marketing", icon: UserGroupIcon, label: "Marketing" },
-  { id: "design", icon: PaintBrushIcon, label: "Design" },
+  { id: "Menu", icon: UserIcon, label: "Menu" },
+  { id: "Departments", icon: PhotoIcon, label: "Departments" },
+  { id: "Co-workers", icon: Square2StackIcon, label: "Co-workers" },
+  { id: "Analytics", icon: ShareIcon, label: "Analytics" },
+  {
+    id: "MarketingCampaingns",
+    icon: UserGroupIcon,
+    label: "Marketing Campaingns",
+  },
+  { id: "MOre", icon: PaintBrushIcon, label: "MOre" },
 ];
 const Sidebar = () => {
   return (
     <div>
       <div className="fixed top-0 left-0 z-40  h-screen transition-transform sm:w-64 ">
-        <div className="h-full px-3 py-4 overflow-y-auto bg-indigo-100">
+        <div className="h-full px-2 py-4 sm:px-4 overflow-y-auto bg-indigo-100">
           <ul className="space-y-2 font-medium">
             {categories.map((category) => (
               <li key={category.id}>
