@@ -25,6 +25,9 @@ const MainComponent: React.FC = () => {
     phone: "",
     address1: "",
     website: "",
+    bannerLink: "",
+    callToActionLink: "",
+    callToActionText: "",
   });
 
   function handleInputChange(newInputValues: Record<string, string>) {
@@ -99,6 +102,8 @@ const MainComponent: React.FC = () => {
                     <MarketingComponent
                       onBannerChange={handleBannerChange}
                       bannerPic={isBannerChanged}
+                      inputValues={inputValues}
+                      onInputChange={handleInputChange}
                     />
                   </div>
                 );
@@ -119,7 +124,6 @@ const MainComponent: React.FC = () => {
             isLogoChanged={isLogoChanged}
             logoSize={logoSize}
             isBannerChanged={isBannerChanged}
-          
           />
         </div>
       </div>

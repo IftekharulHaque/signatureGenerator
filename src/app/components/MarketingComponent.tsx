@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 interface MarketingComponentProps {
   onBannerChange: (newInputValues: File | null) => void;
   bannerPic: File | null;
+  onInputChange: (newInputValues: Record<string, string>) => void;
+  inputValues: Record<string, string>;
 }
 
 const MarketingComponent: React.FC<MarketingComponentProps> = ({
   onBannerChange,
-
+  inputValues,
+  onInputChange,
   bannerPic,
 }) => {
+  const [toggleValues, setToggleValues] = useState<Record<string, string>>({});
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const updatedInputValues = {
+      ...inputValues,
+      [name]: value,
+    };
+    onInputChange(updatedInputValues);
+  };
+
+  const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    if (!checked) {
+      setToggleValues({ ...toggleValues, [name]: inputValues[name] });
+      onInputChange({ ...inputValues, [name]: "" });
+    } else {
+      onInputChange({ ...inputValues, [name]: toggleValues[name] });
+    }
+  };
+
   const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const pic = e.target.files[0];
@@ -18,6 +42,7 @@ const MarketingComponent: React.FC<MarketingComponentProps> = ({
     console.log(e.target.files?.[0]);
     return;
   };
+
   const inputStyle =
     "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md";
 
@@ -28,8 +53,8 @@ const MarketingComponent: React.FC<MarketingComponentProps> = ({
   return (
     <div className="max-w-xl shadow-xl shadow-gray-200 ">
       <div className="rounded-xl bg-white  ring ring-indigo-50 ">
-        <div className="px-12 pt-6 -mb-3 text-xl text-[#07074D]">Pictures</div>
-        {/* For profilepic change */}
+        <div className="px-12 pt-6 -mb-3 text-xl text-[#07074D]">Marketing</div>
+        {/* For banner change */}
         <div>
           <div className="px-12 pt-6 -mb-6 text-lg text-[#07074D]">Banner</div>
 
@@ -58,7 +83,9 @@ const MarketingComponent: React.FC<MarketingComponentProps> = ({
               <div className="flex items-center">
                 <input
                   type="text"
-                  name="link"
+                  name="bannerLink"
+                  value={inputValues.bannerLink}
+                  onChange={handleChange}
                   placeholder="https://www.example.com"
                   className={inputStyle}
                 />
@@ -66,8 +93,9 @@ const MarketingComponent: React.FC<MarketingComponentProps> = ({
                   <input
                     type="checkbox"
                     className="sr-only peer"
-                    name="name"
+                    name="bannerLink"
                     defaultChecked
+                    onChange={handleToggle}
                   />
                   <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
                   <span className="ml-3 text-sm font-medium text-gray-900 ">
@@ -86,48 +114,65 @@ const MarketingComponent: React.FC<MarketingComponentProps> = ({
             </div>
           </div>
         </div>
-        {/* For company logo change */}
-        <div>
-        <div className="px-12 pt-6 -mb-6 text-lg text-[#07074D]">Banner</div>
-          <div className="flex items-center">
-            <input
-              type="text"
-              name="name"
-              placeholder="Call"
-              className={inputStyle}
-            />
-            <label className="relative inline-flex items-center ml-4 cursor-pointer">
-              <input
-                type="checkbox"
-                className="sr-only peer"
-                name="name"
-                defaultChecked
-              />
-              <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
-              <span className="ml-3 text-sm font-medium text-gray-900 ">
-                Show
-              </span>
-            </label>
+
+        <div className="">
+          <div className="px-12 pt-6 mb-6 text-lg text-[#07074D]">
+            Call to Action
           </div>
-          <div className="flex items-center">
-            <input
-              type="text"
-              name="name"
-              placeholder="https://www.example.com"
-              className={inputStyle}
-            />
-            <label className="relative inline-flex items-center ml-4 cursor-pointer">
-              <input
-                type="checkbox"
-                className="sr-only peer"
-                name="name"
-                defaultChecked
-              />
-              <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
-              <span className="ml-3 text-sm font-medium text-gray-900 ">
-                Show
-              </span>
-            </label>
+          <div className="mx-auto px-8 p-2 w-full max-w-[550px]">
+            <div className=" mx-auto">
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  name="callToActionText"
+                  placeholder="Call to action"
+                  defaultValue={inputValues.callToACtionText}
+                  value={inputValues.callToActionText}
+                  onChange={handleChange}
+                  className={inputStyle}
+                />
+                <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    name="callToActionText"
+                    defaultChecked
+                    onChange={handleToggle}
+                  />
+                  <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                  <span className="ml-3 text-sm font-medium text-gray-900 ">
+                    Show
+                  </span>
+                </label>
+              </div>
+
+              <div className="mb-5">
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="callToActionLink"
+                    placeholder="www.example.com"
+                    defaultValue={inputValues.callToACtionLink}
+                    value={inputValues.callToActionLink}
+                    onChange={handleChange}
+                    className={inputStyle}
+                  />
+                  <label className="relative inline-flex items-center ml-4 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      name="callToActionLink"
+                      defaultChecked
+                      onChange={handleToggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-500 peer-focus:outline-none  rounded-full peer peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-green-600"></div>
+                    <span className="ml-3 text-sm font-medium text-gray-900 ">
+                      Show
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
